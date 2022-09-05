@@ -1,3 +1,3 @@
 //edfdvdvvdv
-//не конфликт
+//РЅРµ РєРѕРЅС„Р»РёРєС‚
 new CalcProject.App.Calc().Run();
