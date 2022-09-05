@@ -1,1 +1,2 @@
-﻿new CalcProject.App.Calc().Run();
+//edfdvdvvdv
+new CalcProject.App.Calc().Run();
