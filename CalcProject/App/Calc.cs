@@ -10,7 +10,7 @@ namespace CalcProject.App
     {
         public void Run()
         {
-            Console.Write(CalcProject.App.RomanNumber.Parse("XV"));
+            Console.Write(CalcProject.App.RomanNumber.Parse("XI"));
         }
     }
 }
