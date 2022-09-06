@@ -8,7 +8,7 @@ namespace CalcProject.App
 {
     public class RomanNumber
     {
-        public static int Parse(string str)
+        public static int Parse(string str) //ололо
         {
             char[] digits = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
             int[] digitValues = { 1, 5, 10, 50, 100, 500, 1000 };
