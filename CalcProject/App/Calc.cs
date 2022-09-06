@@ -13,6 +13,7 @@ namespace CalcProject.App
             Console.Write(CalcProject.App.RomanNumber.Parse("XV"));
             Console.Write(CalcProject.App.RomanNumber.Parse("XV"));
             Console.Write(CalcProject.App.RomanNumber.Parse("XXXL"));
+            //поменял Run
         }
     }
 }
