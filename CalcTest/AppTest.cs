@@ -37,5 +37,11 @@ namespace CalcTest
             Assert.AreEqual(RomanNumber.Parse("LV"), 55);
             Assert.AreEqual(RomanNumber.Parse("XL"), 40);
         }
+        [TestMethod]
+        public void TestRomanParseException()
+        {
+            Assert.ThrowsException<ArgumentException>(
+                () => RomanNumber.Parse("0"));
+        }
     }
 }
