@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CalcProject.App;
+using System;
 namespace CalcTest
 {
     [TestClass]
@@ -43,6 +44,27 @@ namespace CalcTest
         {
             Assert.ThrowsException<ArgumentException>(
                 () => RomanNumber.Parse("0"));
+        }
+
+        [TestMethod]
+        public void TestRomanParseExceptN()
+        {
+            Assert.IsTrue(Assert.ThrowsException<ArgumentException>(
+                () => RomanNumber.Parse("XN")).Message.StartsWith("Invalid digit"));
+        }
+
+        [TestMethod]
+        public void TestRomanParseEmpty()
+        {
+            Assert.AreEqual(Assert.ThrowsException<ArgumentException>(
+                () => RomanNumber.Parse("")).Message, "String is empty");
+        }
+
+        [TestMethod]
+        public void TestRomanParseNull()
+        {
+            Assert.AreEqual(Assert.ThrowsException<ArgumentException>(
+                () => RomanNumber.Parse(null)).Message, "String was null");
         }
     }
 }
