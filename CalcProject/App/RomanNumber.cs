@@ -8,6 +8,11 @@ namespace CalcProject.App
 {
     public class RomanNumber
     {
+        public int Val { get; set; }
+        public RomanNumber(int x)
+        {
+            Val = x;
+        }
         public static int Parse(string str) //ололо
         {
             char[] digits = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
@@ -49,6 +54,26 @@ namespace CalcProject.App
                 }  
             }
             return res;
+        }
+
+        public override string ToString()
+        {
+            int x = Val;
+            if (x == 0)
+                return "N";
+            string result = "";
+            int[] digits = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+            string[] romanDigits = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+            for (int i = 0; i < digits.Length; i++)
+            {
+                while (x >= digits[i])
+                {
+                    x -= digits[i];
+                    result += romanDigits[i];
+                }
+            }
+
+            return result;
         }
     }
 }

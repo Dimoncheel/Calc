@@ -66,5 +66,24 @@ namespace CalcTest
             Assert.AreEqual(Assert.ThrowsException<ArgumentException>(
                 () => RomanNumber.Parse(null)).Message, "String was null");
         }
+
+        [TestMethod]
+        public void TestRomanParseNegative()
+        {
+            Assert.AreEqual(RomanNumber.Parse("-IV"), -4);
+            Assert.AreEqual(RomanNumber.Parse("-XL"), -40);
+            Assert.AreEqual(RomanNumber.Parse("-CM"), -900);
+        }
+
+        [TestMethod]
+        public void TestRomanToStringNegative()
+        {
+            RomanNumber number = new RomanNumber(-4);
+            Assert.AreEqual("-IV", number.ToString());
+            number.Val = -40;
+            Assert.AreEqual("-XL", number.ToString());
+            number.Val = -900;
+            Assert.AreEqual("-CM", number.ToString());
+        }
     }
 }
