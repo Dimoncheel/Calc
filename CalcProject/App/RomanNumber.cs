@@ -16,8 +16,8 @@ namespace CalcProject.App
         public static int Parse(string str) //ололо
         {
             if (str == null) throw new ArgumentNullException("string was null");
-            if (str.Length == null) throw new ArgumentNullException("string was null");
-
+            if (str.Length == null) throw new ArgumentNullException("string was empty");
+0
             bool counter=false;
             if (str.StartsWith("-"))
             {
