@@ -15,11 +15,15 @@ namespace CalcProject.App
         }
         public static int Parse(string str) //ололо
         {
-            bool counter=false;
+            bool counter = false;
+            if(str=="N")
+            {
+                return 0;
+            }
             if (str[0] == '-')
             {
-                counter=true;
-                str=str.Substring(1,str.Length-1); 
+                counter = true;
+                str = str.Substring(1, str.Length - 1);
             }
             char[] digits = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
             int[] digitValues = { 1, 5, 10, 50, 100, 500, 1000 };
@@ -30,7 +34,7 @@ namespace CalcProject.App
                 int ind = Array.IndexOf(digits, str[0]);
                 return digitValues[ind];
             }
-            for (int i = str.Length-1; i >= 0; i--)
+            for (int i = str.Length - 1; i >= 0; i--)
             {
                 if (res == 0)
                 {
@@ -44,7 +48,7 @@ namespace CalcProject.App
                 }
                 else
                 {
-                    
+
                     int ind = Array.IndexOf(digits, str[i]);
                     if (ind == -1)
                     {
@@ -56,10 +60,10 @@ namespace CalcProject.App
                     }
                     else if (digitValues[ind] < res) res -= digitValues[ind];
                     else res += digitValues[ind];
-                    lastStr = str[i]; 
-                }  
+                    lastStr = str[i];
+                }
             }
-            if(counter)
+            if (counter)
             {
                 return -res;
             }
@@ -84,6 +88,32 @@ namespace CalcProject.App
             }
 
             return result;
+        }
+
+        public RomanNumber Add(RomanNumber other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException("Digit was null");
+            }
+            return new(this.Val + other.Val);
+        }
+        public RomanNumber Add(int right)
+        {
+            if (right == null)
+            {
+                throw new ArgumentNullException("Digit was null");
+            }
+            return new(this.Val + right);
+        }
+        public RomanNumber Add(string right)
+        {
+            if (right == null)
+            {
+                throw new ArgumentNullException("Digit was null");
+            }
+
+            return new(this.Val + RomanNumber.Parse(right));
         }
     }
 }

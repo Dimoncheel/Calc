@@ -86,4 +86,47 @@ namespace CalcTest
             Assert.AreEqual("-CM", number.ToString());
         }
     }
+
+    [TestClass]
+    public class OperationsTest
+    {
+        [TestMethod]
+        public void AddTest()
+        {
+            RomanNumber rn2 = new(2);
+            RomanNumber rn3 = new(3);
+            RomanNumber rn5 = new(5);
+            Assert.AreEqual(5, rn2.Add(rn3).Val);
+            Assert.AreEqual("V", rn2.Add(rn3).ToString());
+            Assert.AreEqual(rn5.Val, rn2.Add(rn3).Val);
+            Assert.AreEqual(new RomanNumber(-5).Val,new RomanNumber(-3).Add(new RomanNumber(-2)).Val);
+            Assert.AreEqual(0,new RomanNumber(3).Add(new RomanNumber(-3)).Val);
+            Assert.AreEqual(4,rn2.Add(rn2).Val);
+            Assert.AreEqual(4,rn2.Add(new RomanNumber(2)).Val);
+            Assert.ThrowsException<ArgumentNullException>(
+               () =>new RomanNumber(10).Add((RomanNumber)null!)).Message.StartsWith("Digit was null");
+            Assert.AreEqual(6, rn2.Add(4).Val);
+            Assert.AreEqual(5, rn2.Add(3).Val);
+            Assert.AreEqual(4, rn2.Add(2).Val);
+        }
+        [TestMethod]
+        public void AddStringTest()
+        {
+            RomanNumber n2 = new(2);
+            RomanNumber n3 = new(3);
+            RomanNumber n5 = new(5);
+            RomanNumber n5_1 = new(5);
+            RomanNumber n0 = new(0);
+            Assert.AreEqual(n3.Val, n2.Add("I").Val);
+            Assert.AreEqual(n3.Val, n5.Add("-II").Val);
+            Assert.AreEqual(n5.Val, n2.Add("III").Val);
+            Assert.AreEqual(n5_1.Val, n5.Add("N").Val);
+            Assert.AreEqual(n5_1.Val, n0.Add("V").Val);
+            var test = Assert.ThrowsException<ArgumentNullException>(
+                 () => n2.Add((string)null)
+             ).Message;
+            Assert.IsTrue(test.Contains("Digit was null"));
+        }
+    }
+
 }
