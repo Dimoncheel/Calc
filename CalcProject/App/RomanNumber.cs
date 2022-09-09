@@ -15,12 +15,20 @@ namespace CalcProject.App
         }
         public static int Parse(string str) //ололо
         {
+            if (str == null) throw new ArgumentNullException("string was null");
+            if (str.Length == null) throw new ArgumentNullException("string was null");
+
             bool counter=false;
             if (str.StartsWith("-"))
             {
                 counter=true;
                 str=str.Substring(1,str.Length-1); 
             }
+            
+            if (str == "N") return 0;
+            
+            
+
             char[] digits = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
             int[] digitValues = { 1, 5, 10, 50, 100, 500, 1000 };
             int res = 0;
