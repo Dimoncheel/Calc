@@ -16,8 +16,8 @@ namespace CalcProject.App
         public static int Parse(string str) //ололо
         {
             if (str == null) throw new ArgumentNullException("string was null");
-            if (str.Length == null) throw new ArgumentNullException("string was empty");
-0
+            if (str.Length == 0) throw new ArgumentNullException("string was empty");
+
             bool counter=false;
             if (str.StartsWith("-"))
             {
@@ -92,6 +92,22 @@ namespace CalcProject.App
             }
 
             return result;
+        }
+
+        public RomanNumber Add(RomanNumber right)
+        {
+            if (right == null) throw new ArgumentNullException("number was null");
+            return new(this.Val + right.Val);
+        }
+
+        public RomanNumber Add(int right)
+        {
+            return new(this.Val + right);
+        }
+        public RomanNumber Add(string right)
+        {
+            if (right == null) throw new ArgumentNullException("number was null");
+            return new(this.Val + Parse(right));
         }
     }
 }
