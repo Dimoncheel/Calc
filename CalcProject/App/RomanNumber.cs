@@ -15,6 +15,12 @@ namespace CalcProject.App
         }
         public static int Parse(string str) //ололо
         {
+            bool counter=false;
+            if (str[0] == '-')
+            {
+                counter=true;
+                str=str.Substring(1,str.Length-1); 
+            }
             char[] digits = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
             int[] digitValues = { 1, 5, 10, 50, 100, 500, 1000 };
             int res = 0;
@@ -52,6 +58,10 @@ namespace CalcProject.App
                     else res += digitValues[ind];
                     lastStr = str[i]; 
                 }  
+            }
+            if(counter)
+            {
+                return -res;
             }
             return res;
         }
