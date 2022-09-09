@@ -16,7 +16,7 @@ namespace CalcProject.App
         public static int Parse(string str) //ололо
         {
             bool counter=false;
-            if (str[0] == '-')
+            if (str.StartsWith("-"))
             {
                 counter=true;
                 str=str.Substring(1,str.Length-1); 
