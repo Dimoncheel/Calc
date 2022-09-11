@@ -15,16 +15,29 @@ namespace CalcProject.App
         }
         public static int Parse(string str) //ололо
         {
+<<<<<<< HEAD
             bool counter = false;
             if(str=="N")
             {
                 return 0;
             }
             if (str[0] == '-')
+=======
+            if (str == null) throw new ArgumentNullException("string was null");
+            if (str.Length == 0) throw new ArgumentNullException("string was empty");
+
+            bool counter=false;
+            if (str.StartsWith("-"))
+>>>>>>> 98c4998cbaf89499f0c8cad08f52c07a60d5ac46
             {
                 counter = true;
                 str = str.Substring(1, str.Length - 1);
             }
+            
+            if (str == "N") return 0;
+            
+            
+
             char[] digits = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
             int[] digitValues = { 1, 5, 10, 50, 100, 500, 1000 };
             int res = 0;
@@ -90,6 +103,7 @@ namespace CalcProject.App
             return result;
         }
 
+<<<<<<< HEAD
         public RomanNumber Add(RomanNumber other)
         {
             if (other == null)
@@ -104,16 +118,31 @@ namespace CalcProject.App
             {
                 throw new ArgumentNullException("Digit was null");
             }
+=======
+        public RomanNumber Add(RomanNumber right)
+        {
+            if (right == null) throw new ArgumentNullException("number was null");
+            return new(this.Val + right.Val);
+        }
+
+        public RomanNumber Add(int right)
+        {
+>>>>>>> 98c4998cbaf89499f0c8cad08f52c07a60d5ac46
             return new(this.Val + right);
         }
         public RomanNumber Add(string right)
         {
+<<<<<<< HEAD
             if (right == null)
             {
                 throw new ArgumentNullException("Digit was null");
             }
 
             return new(this.Val + RomanNumber.Parse(right));
+=======
+            if (right == null) throw new ArgumentNullException("number was null");
+            return new(this.Val + Parse(right));
+>>>>>>> 98c4998cbaf89499f0c8cad08f52c07a60d5ac46
         }
     }
 }
