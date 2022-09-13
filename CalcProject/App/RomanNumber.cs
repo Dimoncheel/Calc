@@ -150,12 +150,16 @@ namespace CalcProject.App
 
         public static RomanNumber Add(object obj1,object obj2)
         {
-            RomanNumber rn1, rn2;
+            //RomanNumber rn1, rn2 - такая запись хуже воспринимается
+            RomanNumber rn1 = new RomanNumber(obj1);
+            RomanNumber rn2 = new RomanNumber(obj2);
+            /*
             if (obj1 is RomanNumber val1) rn1 = val1;
             else rn1 = new RomanNumber(obj1);
-
+                                                        - дублирование кода (плохо)
             if (obj2 is RomanNumber val2) rn2 = val2;
             else rn2 = new RomanNumber(obj2);
+            */
 
             return new RomanNumber(rn1.Val + rn2.Val);
         }
