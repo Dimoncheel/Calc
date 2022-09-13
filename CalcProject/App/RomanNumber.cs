@@ -13,8 +13,20 @@ namespace CalcProject.App
         {
             Val = x;
         }
+        public RomanNumber()
+        {
+        }
+        private RomanNumber(object value)
+        {
+            if (value is null) throw new ArgumentNullException("Argument null exception");
+            else if (value is RomanNumber rn) Val = rn.Val;
+            else if (value is int int_val) Val = int_val;
+            else if (value is string s_val) Val = RomanNumber.Parse(s_val);
+            else throw new ArgumentException($"Invalid argument type {value.GetType()}");
+        }
         public static int Parse(string str) //ололо
         {
+            int n_counter = 0;
             if (str == null) throw new ArgumentNullException("string was null");
             if (str.Length == 0) throw new ArgumentNullException("string was empty");
 
@@ -40,6 +52,8 @@ namespace CalcProject.App
             }
             for (int i = str.Length - 1; i >= 0; i--)
             {
+                if (str[i] == 'N') n_counter++;
+                if(n_counter >1) throw new ArgumentException("Invalid digit");
                 if (res == 0)
                 {
                     int ind = Array.IndexOf(digits, str[i]);
@@ -100,14 +114,50 @@ namespace CalcProject.App
             return new(this.Val + right.Val);
         }
 
-        public RomanNumber Add(int right)
+        public  RomanNumber Add(int right)
         {
-            return new(this.Val + right);
+            return this.Add(new RomanNumber(right));
         }
-        public RomanNumber Add(string right)
+        public  RomanNumber Add(string right)
         {
-            if (right == null) throw new ArgumentNullException("number was null");
-            return new(this.Val + Parse(right));
+            if (right == null) throw new ArgumentNullException("Digit was null");
+            return this.Add(new RomanNumber(RomanNumber.Parse(right)));
+        }
+
+        //public static RomanNumber Add(int a,int b)
+        //{
+        //    return new(a + b);
+        //}
+
+        //public static RomanNumber Add(RomanNumber a, int b)
+        //{
+        //    return RomanNumber.Add(a.Val,b);
+        //}
+
+        //public static RomanNumber Add(RomanNumber a, RomanNumber b)
+        //{
+        //    return RomanNumber.Add(a.Val, b.Val); ;
+        //}
+        //public static RomanNumber Add(string a, string b)
+        //{
+
+        //    return RomanNumber.Add(RomanNumber.Parse(a),RomanNumber.Parse(b));
+        //}
+        //public static RomanNumber Add(RomanNumber a, string b)
+        //{
+        //    return RomanNumber.Add(a.Val,RomanNumber.Parse(b));
+        //}
+
+        public static RomanNumber Add(object obj1,object obj2)
+        {
+            RomanNumber rn1, rn2;
+            if (obj1 is RomanNumber val1) rn1 = val1;
+            else rn1 = new RomanNumber(obj1);
+
+            if (obj2 is RomanNumber val2) rn2 = val2;
+            else rn2 = new RomanNumber(obj2);
+
+            return new RomanNumber(rn1.Val + rn2.Val);
         }
     }
 }

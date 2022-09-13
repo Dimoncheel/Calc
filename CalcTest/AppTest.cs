@@ -51,9 +51,18 @@ namespace CalcTest
         {
             Assert.IsTrue(Assert.ThrowsException<ArgumentException>(
                 () => RomanNumber.Parse("XN")).Message.StartsWith("Invalid digit"));
+
+            Assert.IsTrue(Assert.ThrowsException<ArgumentException>(
+               () => RomanNumber.Parse("XN")).Message.StartsWith("Invalid digit"));
         }
 
         [TestMethod]
+        public void TestRomanParseZero()
+        {
+            Assert.AreEqual(0, RomanNumber.Parse("N"));
+        }
+
+            [TestMethod]
         public void TestRomanParseEmpty()
         {
             Assert.AreEqual(Assert.ThrowsException<ArgumentException>(
@@ -126,6 +135,16 @@ namespace CalcTest
                  () => n2.Add((string)null)
              ).Message;
             Assert.IsTrue(test.Contains("Digit was null"));
+        }
+        [TestMethod]
+        public void AddStaticTest()
+        {
+            Assert.AreEqual(10, RomanNumber.Add("V", "V").Val);
+            Assert.AreEqual(10, RomanNumber.Add(5, 5).Val);
+            Assert.AreEqual(10, RomanNumber.Add("V", 5).Val);
+            Assert.AreEqual(10, RomanNumber.Add(new RomanNumber(5), "V").Val);
+            Assert.AreEqual(10, RomanNumber.Add(new RomanNumber(5), 5).Val);
+            Assert.AreEqual(10, RomanNumber.Add(new RomanNumber(5), new RomanNumber(5)).Val);
         }
     }
 
