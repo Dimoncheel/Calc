@@ -8,6 +8,7 @@ namespace CalcProject.App
 {
     public class RomanNumber
     {
+        public static Resources Resources { get; set; }
         public int Val { get; set; }
         public RomanNumber(int x)
         {
@@ -18,17 +19,17 @@ namespace CalcProject.App
         }
         private RomanNumber(object value)
         {
-            if (value is null) throw new ArgumentNullException("Argument null exception");
+            if (value is null) throw new ArgumentNullException(Resources.ArgumentNullMessage());
             else if (value is RomanNumber rn) Val = rn.Val;
             else if (value is int int_val) Val = int_val;
             else if (value is string s_val) Val = RomanNumber.Parse(s_val);
-            else throw new ArgumentException($"Invalid argument type {value.GetType()}");
+            else throw new ArgumentException(Resources.InvalidDigitMessage(value.ToString()));
         }
         public static int Parse(string str) //ололо
         {
             int n_counter = 0;
-            if (str == null) throw new ArgumentNullException("string was null");
-            if (str.Length == 0) throw new ArgumentNullException("string was empty");
+            if (str == null) throw new ArgumentNullException(Resources.ArgumentNullMessage());
+            if (str.Length == 0) throw new ArgumentNullException(Resources.EmptyStringMessage());
 
             bool counter=false;
             if (str.StartsWith("-"))
@@ -48,19 +49,23 @@ namespace CalcProject.App
             if (str.Length == 1)
             {
                 int ind = Array.IndexOf(digits, str[0]);
+                if (ind == -1)
+                {
+                    throw new ArgumentException(Resources.InvalidDigitMessage(str));
+                }
                 return digitValues[ind];
             }
             for (int i = str.Length - 1; i >= 0; i--)
             {
                 if (str[i] == 'N') n_counter++;
-                if(n_counter >1) throw new ArgumentException("Invalid digit");
+                if(n_counter >1) throw new ArgumentException(Resources.InvalidDigitMessage(str[i]));
                 if (res == 0)
                 {
                     int ind = Array.IndexOf(digits, str[i]);
                     lastStr = str[i];
                     if (ind == -1)
                     {
-                        throw new ArgumentException($"Invalid digit '{str[i]}'");
+                        throw new ArgumentException(Resources.InvalidDigitMessage(str[i]));
                     }
                     res = digitValues[ind];
                 }
@@ -70,7 +75,7 @@ namespace CalcProject.App
                     int ind = Array.IndexOf(digits, str[i]);
                     if (ind == -1)
                     {
-                        throw new ArgumentException($"Invalid digit '{str[i]}'");
+                        throw new ArgumentException(Resources.InvalidDigitMessage(str[i]));
                     }
                     if (lastStr == str[i])
                     {
@@ -110,7 +115,7 @@ namespace CalcProject.App
 
         public RomanNumber Add(RomanNumber right)
         {
-            if (right == null) throw new ArgumentNullException("number was null");
+            if (right == null) throw new ArgumentNullException("Argument null exception");
             return new(this.Val + right.Val);
         }
 
@@ -120,7 +125,7 @@ namespace CalcProject.App
         }
         public  RomanNumber Add(string right)
         {
-            if (right == null) throw new ArgumentNullException("Digit was null");
+            if (right == null) throw new ArgumentNullException("Argument null exception");
             return this.Add(new RomanNumber(RomanNumber.Parse(right)));
         }
 

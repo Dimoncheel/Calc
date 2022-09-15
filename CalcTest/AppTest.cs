@@ -6,10 +6,17 @@ namespace CalcTest
     [TestClass]
     public class AppTest
     {
+        private Resources Resources = new Resources();
+
+        public AppTest()
+        {
+            RomanNumber.Resources = Resources;
+        }
+
         [TestMethod]
         public void TestCalc()
         {
-            CalcProject.App.Calc calc = new();
+            CalcProject.App.Calc calc = new(Resources);
             Assert.IsNotNull(calc);
         }
         //aaalllallaaaallaaaaa mira
@@ -50,10 +57,10 @@ namespace CalcTest
         public void TestRomanParseExceptN()
         {
             Assert.IsTrue(Assert.ThrowsException<ArgumentException>(
-                () => RomanNumber.Parse("XN")).Message.StartsWith("Invalid digit"));
+                () => RomanNumber.Parse("XNN")).Message.StartsWith(Resources.InvalidDigitMessage('\0')[..12]));
 
             Assert.IsTrue(Assert.ThrowsException<ArgumentException>(
-               () => RomanNumber.Parse("XN")).Message.StartsWith("Invalid digit"));
+               () => RomanNumber.Parse("XN")).Message.StartsWith(Resources.InvalidDigitMessage('\0')[..12]));
         }
 
         [TestMethod]
@@ -66,14 +73,14 @@ namespace CalcTest
         public void TestRomanParseEmpty()
         {
             Assert.AreEqual(Assert.ThrowsException<ArgumentException>(
-                () => RomanNumber.Parse("")).Message, "String is empty");
+                () => RomanNumber.Parse("")).Message, Resources.EmptyStringMessage());
         }
 
         [TestMethod]
         public void TestRomanParseNull()
         {
             Assert.AreEqual(Assert.ThrowsException<ArgumentException>(
-                () => RomanNumber.Parse(null)).Message, "String was null");
+                () => RomanNumber.Parse(null)).Message, Resources.EmptyStringMessage());
         }
 
         [TestMethod]
