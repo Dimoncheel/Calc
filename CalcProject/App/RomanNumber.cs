@@ -125,7 +125,7 @@ namespace CalcProject.App
         }
         public  RomanNumber Add(string right)
         {
-            if (right == null) throw new ArgumentNullException("Argument null exception");
+            if (right == null) throw new ArgumentNullException(Resources.ArgumentNullMessage());
             return this.Add(new RomanNumber(RomanNumber.Parse(right)));
         }
 

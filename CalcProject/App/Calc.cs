@@ -16,36 +16,17 @@ namespace CalcProject.App
             RomanNumber.Resources = resources;
         }
 
-        public void Run()
+        public RomanNumber CreateRomanNumber()
         {
-            RomanNumber rn1,rn2;
+            RomanNumber rn;
             while (true)
             {
                 try
                 {
-                    Console.WriteLine("Input number");
-                    string? inp = Console.ReadLine();
-                   
-                    rn1 =new RomanNumber(RomanNumber.Parse(inp));
-                    break;
-                }
-                catch (ArgumentNullException ex1)
-                {
-                    Console.WriteLine(ex1.Message);
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            while (true)
-            {
-                try
-                {
-                    Console.WriteLine("Input number");
+                    Console.WriteLine(RomanNumber.Resources.EnterNumberMessage());
                     string? inp = Console.ReadLine();
 
-                    rn2 = new RomanNumber(RomanNumber.Parse(inp));
+                    rn = new RomanNumber(RomanNumber.Parse(inp));
                     break;
                 }
                 catch (ArgumentNullException ex1)
@@ -57,8 +38,38 @@ namespace CalcProject.App
                     Console.WriteLine(ex.Message);
                 }
             }
-            Console.WriteLine(rn1.Add(rn2));
-            //поменял Run
+            return rn;
+        }
+
+        public void CalcRomanNumber(RomanNumber rn1,RomanNumber rn2)
+        {
+            Console.WriteLine(RomanNumber.Resources.EnterOperationMessage());
+            string? operation = Console.ReadLine();
+            switch (operation) {
+                case "+": 
+                    Console.WriteLine(rn1.Add(rn2));
+                    break;
+                case "-": 
+                    Console.WriteLine("Next patch");
+                    break;
+                case "*": 
+                    Console.WriteLine("Next patch");
+                    break;
+                case "/":
+                    Console.WriteLine("Next patch");
+                    break;
+                default:
+                    throw new ArgumentException(RomanNumber.Resources.InvalidDigitMessage(operation));
+            }
+
+        }
+
+        public void Run()
+        {
+            RomanNumber rn1=CreateRomanNumber();
+            RomanNumber rn2=CreateRomanNumber();
+         
+            CalcRomanNumber(rn1,rn2);
         }
     }
 }

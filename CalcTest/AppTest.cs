@@ -106,6 +106,12 @@ namespace CalcTest
     [TestClass]
     public class OperationsTest
     {
+        private Resources Resources = new Resources();
+
+        public OperationsTest()
+        {
+            RomanNumber.Resources = Resources;
+        }
         [TestMethod]
         public void AddTest()
         {
@@ -141,10 +147,21 @@ namespace CalcTest
             var test = Assert.ThrowsException<ArgumentNullException>(
                  () => n2.Add((string)null)
              ).Message;
-            Assert.IsTrue(test.Contains("Digit was null"));
+            Assert.IsTrue(test.Contains(Resources.ArgumentNullMessage()));
         }
         [TestMethod]
         public void AddStaticTest()
+        {
+            Assert.AreEqual(10, RomanNumber.Add("V", "V").Val);
+            Assert.AreEqual(10, RomanNumber.Add(5, 5).Val);
+            Assert.AreEqual(10, RomanNumber.Add("V", 5).Val);
+            Assert.AreEqual(10, RomanNumber.Add(new RomanNumber(5), "V").Val);
+            Assert.AreEqual(10, RomanNumber.Add(new RomanNumber(5), 5).Val);
+            Assert.AreEqual(10, RomanNumber.Add(new RomanNumber(5), new RomanNumber(5)).Val);
+        }
+
+        [TestMethod]
+        public void AddObjecTest()
         {
             Assert.AreEqual(10, RomanNumber.Add("V", "V").Val);
             Assert.AreEqual(10, RomanNumber.Add(5, 5).Val);
