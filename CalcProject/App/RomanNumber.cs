@@ -129,6 +129,11 @@ namespace CalcProject.App
             return this.Add(new RomanNumber(RomanNumber.Parse(right)));
         }
 
+        public RomanNumber Min(RomanNumber right)
+        {
+            return this.Add(-right.Val);
+        }
+
         //public static RomanNumber Add(int a,int b)
         //{
         //    return new(a + b);

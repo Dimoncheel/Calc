@@ -8,10 +8,35 @@ namespace CalcProject.App
 {
     public class Resources
     {
+        public string[] SupportedCultures = { "en-US","uk-UA"};
 
-        public string EnterNumberMessage(string culture = "en-US")
+        const string UNSUPPORTEDCULTURE = "Unsupported culture";
+
+        private string _culture;
+
+        public string Culture
         {
-            return culture switch
+            get => _culture;
+            set {
+                if (Array.IndexOf(SupportedCultures, value) != -1)
+                {
+                    _culture = value;
+                }
+                else
+                {
+                    throw new ArgumentException(UNSUPPORTEDCULTURE);
+                }
+            } 
+        }
+
+        public Resources()
+        {
+            Culture = SupportedCultures[0];
+        }
+
+        public string EnterNumberMessage()
+        {
+            return Culture switch
             {
                 "en-US" => "Enter number",
                 "uk-UA" => "Введіть число",
@@ -19,9 +44,9 @@ namespace CalcProject.App
             };
         }
 
-        public string EnterOperationMessage(string culture = "en-US")
+        public string EnterOperationMessage()
         {
-            return culture switch
+            return Culture switch
             {
                 "en-US" => "Enter operation",
                 "uk-UA" => "Введіть операцію",
@@ -29,55 +54,55 @@ namespace CalcProject.App
             };
         }
 
-        public string ResultMessage(string culture = "en-US")
+        public string ResultMessage()
         {
-            return culture switch
+            return Culture switch
             {
                 "en-US" => "Result",
                 "uk-UA" => "Результат",
                 _ => throw new ArgumentException("Culture unsupported")
             };
         }
-        public string EmptyStringMessage(string culture="en-US")
+        public string EmptyStringMessage()
         {
-            return culture switch
+            return Culture switch
             {
                 "en-US"=>"Empty string not allowed",
                 "uk-UA"=>"Порожній рядок неприпустимий",
                 _=>throw new ArgumentException("Culture unsupported")
             };
         }
-        public string InvalidDigitMessage(char digit, string culture = "en-US")
+        public string InvalidDigitMessage(char digit)
         {
-            return culture switch
+            return Culture switch
             {
                 "en-US" => $"Invalid digit '{digit}'",
                 "uk-UA" => $"Неприпустимий символ '{digit}'",
                 _ => throw new ArgumentException("Culture unsupported")
             };
         }
-        public string InvalidDigitMessage(string digit,string culture = "en-US")
+        public string InvalidDigitMessage(string digit)
         { 
-            return culture switch
+            return Culture switch
             {
                 "en-US" => $"Invalid digit '{digit}'",
                 "uk-UA" => $"Неприпустимий символ '{digit}'",
                 _ => throw new ArgumentException("Culture unsupported")
             };
         }
-        public string InvalidTypeMessage(string typeName, string culture = "en-US")
+        public string InvalidTypeMessage(string typeName)
         {
 
-            return culture switch
+            return Culture switch
             {
                 "en-US" => $"Invalid argument type '{typeName}'",
                 "uk-UA" => $"Неприпустимий тип '{typeName}",
                 _ => throw new ArgumentException("Culture unsupported")
             };
         }
-        public string ArgumentNullMessage(string culture = "en-US")
+        public string ArgumentNullMessage()
         {
-            return culture switch
+            return Culture switch
             {
                 "en-US" => "Argument null exception",
                 "uk-UA" => "Аргумент дорівнює NULL",

@@ -50,7 +50,7 @@ namespace CalcProject.App
                     Console.WriteLine(rn1.Add(rn2));
                     break;
                 case "-": 
-                    Console.WriteLine("Next patch");
+                    Console.WriteLine(rn1.Min(rn2));
                     break;
                 case "*": 
                     Console.WriteLine("Next patch");
@@ -63,8 +63,47 @@ namespace CalcProject.App
             }
 
         }
-
+        private void SelectCulture()
+        {
+            Console.WriteLine("Select culture:");
+            for(int i = 0; i < _resources.SupportedCultures.Length; i++)
+            {
+                Console.WriteLine($"{i + 1} {_resources.SupportedCultures[i]}");
+            }
+            int selection=Convert.ToInt32(Console.ReadLine())-1;
+            _resources.Culture=_resources.SupportedCultures[selection];
+        }
+        public RomanNumber EvalExpression(string expression)
+        {
+            if(expression is null)
+            {
+                throw new ArgumentException(_resources.ArgumentNullMessage());
+            }
+            String[] parts = expression.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 3)
+            {
+                throw new ArgumentException(_resources.InvalidDigitMessage(parts[1]));
+            }
+            if (parts[1] != "+")
+            {
+                throw new ArgumentException("Invalid operation");
+            }
+            RomanNumber rn1 = new(RomanNumber.Parse(parts[0]));
+            RomanNumber rn2 = new(RomanNumber.Parse(parts[2]));
+            return rn1.Add(rn2);
+        }
         public void Run()
+        {
+            SelectCulture();
+
+            Console.WriteLine("Input operation like: XY + C");
+
+            String? operation = Console.ReadLine();
+
+            Console.WriteLine($"{operation}:{EvalExpression(operation)}");
+
+        }
+        public void RunOld()
         {
             RomanNumber rn1=CreateRomanNumber();
             RomanNumber rn2=CreateRomanNumber();
