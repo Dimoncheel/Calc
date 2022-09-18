@@ -96,7 +96,7 @@ namespace CalcProject.App
         {
             SelectCulture();
 
-            Console.WriteLine("Input operation like: XY + C");
+            Console.WriteLine(_resources.InputNumberMessage());
 
             String? operation = Console.ReadLine();
 

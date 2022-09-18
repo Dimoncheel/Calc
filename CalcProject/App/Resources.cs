@@ -43,6 +43,15 @@ namespace CalcProject.App
                 _ => throw new ArgumentException("Culture unsupported")
             };
         }
+        public string InputNumberMessage()
+        {
+            return Culture switch
+            {
+                "en-US" => "Input operation like: XY + C",
+                "uk-UA" => "Введіть операцію наприклад: XY + C",
+                _ => throw new ArgumentException("Culture unsupported")
+            };
+        }
 
         public string EnterOperationMessage()
         {
